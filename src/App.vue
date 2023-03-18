@@ -1,16 +1,33 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png" />
   <div>
-    <h4>xx 원룸</h4>
-    <p>50 만원</p>
+    <h4>{{ product[0] }}</h4>
+    <p>{{ price[0] }}</p>
   </div>
   <div>
-    <h4>xx 원룸</h4>
-    <p>50 만원</p>
+    <h4>{{ product[1] }}</h4>
+    <p>{{ price[1] }}</p>
+  </div>
+  <div>
+    <h4>{{ product[2] }}</h4>
+    <p>{{ price[2] }}</p>
   </div>
 </template>
 
-<script></script>
+<script>
+export default {
+  name: "App",
+  data() {
+    return {
+      // data는 obj형식
+      스타일: "color: blue",
+      product: [50, 60, 70],
+      pricet: ["역삼동원룸", "천호동원룸", "마포구원룸"],
+    };
+  },
+  components: {},
+};
+</script>
 
 <style>
 #app {
