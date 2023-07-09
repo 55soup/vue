@@ -1,20 +1,19 @@
 <template>
+  <div class="black-bg" v-if="isModalOn">
+    <div class="white-bg">
+      <h4>상세페이지</h4>
+      <p>상세페이지 내용</p>
+    </div>
+  </div>
   <div class="menu">
     <a v-for="(menu, i) in menus" :key="i">{{ menu }}</a>
   </div>
   <img alt="Vue logo" src="./assets/logo.png" />
-  <div>
-    <h4>{{ products[0] }}</h4>
+  <div v-for="(product, i) in products" :key="i">
+    <img :src="imgUrl[i]" class="room-img"/>
+    <h4 @click="isModalOn=true">{{ product }}</h4>
     <p>50</p>
-    <button @click="increase">허위매물신고</button> <span>신고수 : {{ 신고수 }}</span>
-  </div>
-  <div>
-    <h4>{{ products[1] }}</h4>
-    <p>50</p>
-  </div>
-  <div>
-    <h4>{{ products[2] }}</h4>
-    <p>50</p>
+    <button @click="increase(i)">허위매물신고</button> <span>신고수 : {{ 신고수[i] }}</span>
   </div>
 </template>
 
@@ -24,15 +23,17 @@ export default {
   data() {
     return {
       // data는 obj형식
+      isModalOn: false,
       스타일: "color: blue",
-      신고수 : 0, 
+      신고수 : [0,0,0], 
       menus: ['Home', 'Shop', 'About'],
       products: ["역삼동원룸", "천호동원룸", "마포구원룸"],
+      imgUrl: [require('./assets/room0.jpg'), require('./assets/room1.jpg'), require('./assets/room2.jpg')],
     };
   },
   methods : {
-    increase(){
-      this.신고수 += 1; // 데이터 사용할 때 this.데이터명
+    increase(i){
+      this.신고수[i] += 1; // 데이터 사용할 때 this.데이터명
     }
   },
   components: {},
@@ -40,6 +41,26 @@ export default {
 </script>
 
 <style>
+body{
+  margin: 0;
+}
+div {
+  box-sizing: border-box;
+}
+.black-bg {
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+  position: fixed; padding: 20px;
+}
+.white-bg{
+  width: 100%; background: white;
+  border-radius: 8px;
+  padding: 20px;
+}
+.room-img {
+  width: 100%;
+  margin-top: 40px;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -47,6 +68,7 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  margin: 0;
 }
 .menu{
   background: darkslateblue;
