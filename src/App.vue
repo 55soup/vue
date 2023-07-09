@@ -3,18 +3,19 @@
     <a v-for="(menu, i) in menus" :key="i">{{ menu }}</a>
   </div>
   <img alt="Vue logo" src="./assets/logo.png" />
-  <div v-for="product in products" :key="product">
-    <h4>{{ product }}</h4>
+  <div>
+    <h4>{{ products[0] }}</h4>
     <p>50</p>
-  </div>
-  <!-- <div>
-    <h4>{{ product[1] }}</h4>
-    <p>{{ price[1] }}</p>
+    <button @click="increase">허위매물신고</button> <span>신고수 : {{ 신고수 }}</span>
   </div>
   <div>
-    <h4>{{ product[2] }}</h4>
-    <p>{{ price[2] }}</p>
-  </div> -->
+    <h4>{{ products[1] }}</h4>
+    <p>50</p>
+  </div>
+  <div>
+    <h4>{{ products[2] }}</h4>
+    <p>50</p>
+  </div>
 </template>
 
 <script>
@@ -24,9 +25,15 @@ export default {
     return {
       // data는 obj형식
       스타일: "color: blue",
+      신고수 : 0, 
       menus: ['Home', 'Shop', 'About'],
       products: ["역삼동원룸", "천호동원룸", "마포구원룸"],
     };
+  },
+  methods : {
+    increase(){
+      this.신고수 += 1; // 데이터 사용할 때 this.데이터명
+    }
   },
   components: {},
 };
