@@ -9,7 +9,9 @@
   <div class="menu">
     <a v-for="(menu, i) in menus" :key="i">{{ menu }}</a>
   </div>
-  <Discount />
+  <Discount 
+    :discountRate="discountRate"
+    v-if="showDiscount"/>
   <button @click="priceSortReverse">가격 높은 순</button>
   <button @click="priceSort">가격 낮은 순</button>
   <button @click="sortABC">가나다순 정렬</button>
@@ -31,6 +33,8 @@ export default {
   data() {
     return {
       // data는 obj형식
+      discountRate: 30,
+      showDiscount : true,
       pressId : 0,
       isModalOn: false,
       스타일: "color: blue",
@@ -71,6 +75,19 @@ export default {
       });
     },
 
+  },
+  mounted(){
+    // setTimeout(()=>{
+    //   this.showDiscount = false;
+    // }, 2000);
+    const discountInterval = setInterval(() => {
+      this.discountRate -= 1;
+      if(this.discountRate <= 0){
+        alert('할인 적용 안됨!')
+        this.showDiscount = false;
+        clearInterval(discountInterval); // interval 실행 중지
+      }
+    }, 1000)
   },
   components: {
     Discount : Discount,
