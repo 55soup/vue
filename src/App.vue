@@ -1,24 +1,17 @@
 <template>
-  <div class="black-bg" v-if="isModalOn">
-    <div class="white-bg">
-      <h4>{{ onerooms[pressId].title }}</h4>
-      <p>상{{ onerooms[pressId].content }}</p>
-      <button @click="isModalOn=false">닫기</button>
-    </div>
-  </div>
+  <Modal :onerooms="onerooms" :pressId="pressId" :isModalOn="isModalOn"/>
   <div class="menu">
     <a v-for="(menu, i) in menus" :key="i">{{ menu }}</a>
   </div>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <div v-for="(room, i) in onerooms" :key="i">
-    <img :src="room.image" class="room-img">
-    <h4 @click="() => {isModalOn=true; pressId=i;}">{{ room.title }}</h4>
-    <p>{{ room.price }}원</p>
-  </div>
+  <Discount />
+  <Card :room="room" v-for="(room, i) in onerooms" :key="i" />
 </template>
 
 <script>
 import data from './assets/oneroom.js';
+import Discount from './Discount';
+import Modal from './Modal';
+import Card from './Card';
 
 export default {
   name: "App",
@@ -40,7 +33,11 @@ export default {
       this.신고수[i] += 1; // 데이터 사용할 때 this.데이터명
     }
   },
-  components: {},
+  components: {
+    Discount : Discount,
+    Modal : Modal,
+    Card : Card,
+  },
 };
 </script>
 
@@ -50,6 +47,12 @@ body{
 }
 div {
   box-sizing: border-box;
+}
+.discount{
+  background: #eee;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
 }
 .black-bg {
   width: 100%; height: 100%;
