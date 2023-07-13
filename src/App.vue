@@ -1,5 +1,5 @@
 <template>
-  <Modal 
+  <Modal
     :onerooms="onerooms" 
     :pressId="pressId" 
     :isModalOn="isModalOn"
@@ -8,7 +8,7 @@
     <a v-for="(menu, i) in menus" :key="i">{{ menu }}</a>
   </div>
   <Discount />
-  <Card 
+  <Card
     @openModal="isModalOn = true; pressId=$event"
     :room="room" 
     v-for="(room, i) in onerooms" :key="i" />
