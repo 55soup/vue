@@ -5,7 +5,7 @@
       <h4>{{ onerooms[pressId].title }}</h4>
       <p>{{ onerooms[pressId].price }}원</p>
       <p>상{{ onerooms[pressId].content }}</p>
-      <!-- <button @click="isModalOn=false">닫기</button> -->
+    <button @click="close">닫기</button>
     </div>
   </div>
 </template>
@@ -17,6 +17,11 @@ export default {
       onerooms : Object, // 외부 데이터 받아오기
       pressId : Number,
       isModalOn : Boolean,
+    },
+    methods : {
+      close(){
+        this.$emit('closeModal')
+      }
     }
 }
 </script>

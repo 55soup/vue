@@ -1,10 +1,17 @@
 <template>
-  <Modal :onerooms="onerooms" :pressId="pressId" :isModalOn="isModalOn"/>
+  <Modal 
+    :onerooms="onerooms" 
+    :pressId="pressId" 
+    :isModalOn="isModalOn"
+    @closeModal="isModalOn = false;"/>
   <div class="menu">
     <a v-for="(menu, i) in menus" :key="i">{{ menu }}</a>
   </div>
   <Discount />
-  <Card :room="room" v-for="(room, i) in onerooms" :key="i" />
+  <Card 
+    @openModal="isModalOn = true; pressId=$event"
+    :room="room" 
+    v-for="(room, i) in onerooms" :key="i" />
 </template>
 
 <script>

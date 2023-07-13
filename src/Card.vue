@@ -1,7 +1,7 @@
 <template>
    <div>
     <img :src="room.image" class="room-img">
-    <h4 @click="isModalOn=true; pressId=i;">{{ room.title }}</h4>
+    <h4 @click="send">{{ room.title }}</h4>
     <p>{{ room.price }}원</p>
   </div>
 </template>
@@ -10,6 +10,11 @@
 export default {
   props : {
       room : Object,
+  },
+  methods : {
+    send(){
+      this.$emit('openModal', this.room.id)
+    },
   }
 }
 </script>
