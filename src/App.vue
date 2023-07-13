@@ -1,9 +1,11 @@
 <template>
-  <Modal
-    :onerooms="onerooms" 
-    :pressId="pressId" 
-    :isModalOn="isModalOn"
-    @closeModal="isModalOn = false;"/>
+  <div class="start" :class="{end : isModalOn}">
+    <Modal
+      :onerooms="onerooms" 
+      :pressId="pressId" 
+      :isModalOn="isModalOn"
+      @closeModal="isModalOn = false;"/>
+  </div>
   <div class="menu">
     <a v-for="(menu, i) in menus" :key="i">{{ menu }}</a>
   </div>
@@ -92,5 +94,12 @@ div {
 .menu a{
   color: white;
   padding: 10px;
+}
+.start {
+  opacity: 0;
+  transition: all 1s;
+}
+.end{
+  opacity: 1;
 }
 </style>
