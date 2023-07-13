@@ -1,15 +1,19 @@
 <template>
-  <div class="start" :class="{end : isModalOn}">
+  <transition name="fade">
     <Modal
       :onerooms="onerooms" 
       :pressId="pressId" 
       :isModalOn="isModalOn"
       @closeModal="isModalOn = false;"/>
-  </div>
+  </transition>
   <div class="menu">
     <a v-for="(menu, i) in menus" :key="i">{{ menu }}</a>
   </div>
   <Discount />
+  <button @click="priceSortReverse">가격 높은 순</button>
+  <button @click="priceSort">가격 낮은 순</button>
+  <button @click="sortABC">가나다순 정렬</button>
+  <button @click="sortBack">원래대로</button>
   <Card
     @openModal="isModalOn = true; pressId=$event"
     :room="room" 
@@ -33,6 +37,7 @@ export default {
       신고수 : [0,0,0], 
       menus: ['Home', 'Shop', 'About'],
       products: ["역삼동원룸", "천호동원룸", "마포구원룸"],
+      originalOnerooms : [...data],
       onerooms : data,
       imgUrl: [require('./assets/room0.jpg'), require('./assets/room1.jpg'), require('./assets/room2.jpg')],
     };
@@ -40,7 +45,32 @@ export default {
   methods : {
     increase(i){
       this.신고수[i] += 1; // 데이터 사용할 때 this.데이터명
-    }
+    },
+    priceSort(){
+      // sort: 원본이 영구적으로 변형됨.
+      this.onerooms.sort((a,b)=>{
+        return a.price - b.price // 오름차순 정렬
+      })
+    },
+    sortBack(){
+      this.onerooms = [...this.originalOnerooms]; // [...배열] : 각 각 별개의 사본을 만듦.
+    },
+    priceSortReverse(){
+      this.onerooms.sort((a,b) => {
+        return b.price - a.price // 내림차순 정렬
+      })
+    },
+    sortABC(){
+      this.onerooms.sort((a,b) => {
+        if(a.title.toLowerCase() > b.title.toLowerCase())
+          return 1;
+        else if(a.title.toLowerCase() < b.title.toLowerCase())
+          return -1;
+        else
+          return 0;
+      });
+    },
+
   },
   components: {
     Discount : Discount,
@@ -51,6 +81,33 @@ export default {
 </script>
 
 <style>
+/* transition 애니메이션 */
+/* 퇴장 애니메이션 */
+.fade-leave-from { 
+  /** 시작 */
+  transform: translateY(0px);
+}
+.fade-leave-active {
+  transition: all 0.3s;
+}
+.fade-leave-to {
+  /** 끝 */
+  transform: translateY(-1000px);
+}
+
+.fade-enter-from { 
+  /** 시작 */
+  transform: translateY(-1000px);
+}
+.fade-enter-active {
+  transition: all 0.3s;
+}
+.fade-enter-to {
+  /** 끝 */
+  transform: translateY(0px);
+}
+/* 애니메이션 */
+
 body{
   margin: 0;
 }
