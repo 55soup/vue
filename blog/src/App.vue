@@ -13,7 +13,10 @@
   </nav>
   
   <!-- router에 props 넘기기 -->
-  <router-view :contents="contents"></router-view>
+  <!-- bootstrap mt-4: margin 40 -->
+  <div class="mt-4">
+    <router-view :contents="contents"></router-view>
+  </div>
   <!-- <List v-for="(content, i) in contents" :key="i" :content="content"/> -->
 </template>
 

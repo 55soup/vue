@@ -1,8 +1,10 @@
 <template>
-  <div v-for="(content, i) in contents" :key="i">
-    <h5>{{content.title}}</h5>
-    <p>{{content.date}}</p>
-  </div>
+  <route-link to="/detail/{{ i }}">
+    <div v-for="(content, i) in contents" :key="i">
+      <h5>{{content.title}}</h5>
+      <p>{{content.date}}</p>
+    </div>
+  </route-link>
 </template>
 
 <script>
