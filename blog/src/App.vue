@@ -13,7 +13,7 @@
   </nav>
   
   <!-- router에 props 넘기기 -->
-  <!-- bootstrap mt-4: margin 40 -->
+  <!-- bootstrap mt-4: margin top 40 -->
   <div class="mt-4">
     <router-view :contents="contents"></router-view>
   </div>

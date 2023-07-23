@@ -2,6 +2,8 @@ import { createWebHistory, createRouter } from "vue-router";
 import List from "./components/List.vue"
 import Home from "./components/Home.vue"
 import Detail from "./components/Detail.vue"
+import Comment from "./components/Comment.vue"
+import Author from "./components/Author.vue"
 
 const routes = [
   {
@@ -16,7 +18,20 @@ const routes = [
     // (\\d+): 정규식 숫자만 입력가능
     // *: url 반복
     path: "/detail/:id(\\d+)",
-    component: Detail
+    component: Detail,
+    children: [
+      // nested routes: 특정 페이지 안에 route를 나누고 싶을때
+      {
+        // /detail/0/author
+        path: "author",
+        component: Author
+      },
+      {
+        // /detail/0/comment
+        path: "comment",
+        component: Comment
+      }
+    ]
   },
   {
     // 404페이지

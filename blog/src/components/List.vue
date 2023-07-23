@@ -1,10 +1,11 @@
 <template>
-  <route-link to="/detail/{{ i }}">
-    <div v-for="(content, i) in contents" :key="i">
-      <h5>{{content.title}}</h5>
-      <p>{{content.date}}</p>
-    </div>
-  </route-link>
+  <div v-for="(content, i) in contents" :key="i" style="cursor: pointer;">
+    <!--  $route: 현재 경로
+          $router: 페이지 이동 관련 기능
+     -->
+    <h5 @click="$router.push(`/detail/${i}`)">{{content.title}}</h5>
+    <p>{{content.date}}</p>
+  </div>
 </template>
 
 <script>
