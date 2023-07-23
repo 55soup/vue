@@ -2,21 +2,22 @@
   <nav class="navbar navbar-light bg-light">
     <div class="container-fluid">
       <a class="navbar-brand">blog</a>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      <div class="nav-item">
+        <!-- view-router link 이동 -->
+        <router-link to="/">홈페이지</router-link>
+      </div>
+      <div class="nav-item">
+        <router-link to="/list">리스트페이지</router-link>
+      </div>
     </div>
   </nav>
-  <div class="container mt-4">
-    <h5>개발자 블로그</h5>
-    <p>made from vue</p>
-  </div>
-  <List v-for="(content, i) in contents" :key="i" :content="content"/>
+  
+  <!-- router에 props 넘기기 -->
+  <router-view :contents="contents"></router-view>
+  <!-- <List v-for="(content, i) in contents" :key="i" :content="content"/> -->
 </template>
 
 <script>
-import List from "./components/List"
 import blog from "./assets/blog"
 
 export default {
@@ -27,7 +28,6 @@ export default {
     }
   },
   components: {
-    List: List,
   }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-for="(content, i) in contents" :key="i">
     <h5>{{content.title}}</h5>
     <p>{{content.date}}</p>
   </div>
@@ -8,7 +8,7 @@
 <script>
 export default {
     props : {
-        content : Object,
+        contents : Object,
     }
 }
 </script>
