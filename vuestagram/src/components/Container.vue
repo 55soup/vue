@@ -1,9 +1,6 @@
 <template>
     <div>
-        컨테이너
-        <Post/>
-        <Post/>
-        <Post/>
+        <Post :post="post" v-for="(post, i) in post" :key="i"/>
     </div>
 </template>
 
@@ -13,6 +10,9 @@ import Post from "./Post.vue"
 export default {
     components : {
         Post : Post,
+    },
+    props : {
+        post : Array,
     }
 }
 </script>

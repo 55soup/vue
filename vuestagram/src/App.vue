@@ -8,7 +8,7 @@
     </ul>
   </div>
 
-  <Container />
+  <Container :post="post"/>
 
   <div class="footer">
     <ul class="footer-button-plus">
@@ -20,9 +20,15 @@
 
 <script>
 import Container from "./components/Container";
+import post from "./assets/post";
 
 export default {
   name: 'App',
+  data() {
+    return{
+      post : post,
+    }
+  },
   components: {
     Container : Container,
   },
