@@ -7,8 +7,8 @@
       <li>Next</li>
     </ul>
   </div>
-
   <Container :post="post"/>
+  <button @click="more">더보기</button>
 
   <div class="footer">
     <ul class="footer-button-plus">
@@ -19,8 +19,9 @@
 </template>
 
 <script>
-import Container from "./components/Container";
-import post from "./assets/post";
+import axios from 'axios';
+import Container from './components/Container';
+import post from './assets/post';
 
 export default {
   name: 'App',
@@ -32,6 +33,15 @@ export default {
   components: {
     Container : Container,
   },
+  methods : {
+    more(){
+      axios.get("https://codingapple1.github.io/vue/more1.json")
+      .then((result) => {
+        console.log(result)
+        this.post.push(result.data);
+      })
+    }
+  }
 }
 </script>
 
