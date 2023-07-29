@@ -5,10 +5,10 @@
     </ul>
     <ul class="header-button-right">
       <li v-if="step == 1" @click="step++">Next</li>
-      <li v-if="step == 2"  @click="publist">발행</li>
+      <li v-if="step == 2" @click="publish()">발행</li>
     </ul>
   </div>
-  <Container :post="post" :step="step" :imgUrl="imgUrl"/>
+  <Container @write="write = $event" :post="post" :step="step" :imgUrl="imgUrl" :content="content"/>
   <button @click="more">더보기</button>
 
   <div class="footer">
@@ -33,6 +33,8 @@ export default {
       clickCount : 0, //버튼 누른 횟수
       step : 0, // tab view UI
       imgUrl : '',
+      write: '',
+      content : '',
     }
   },
   components: {
@@ -57,8 +59,22 @@ export default {
       this.imgUrl = URL.createObjectURL(file[0]); //이미지 URL를 임시생성
       console.log(this.imgUrl);
       this.step++; // 업로드 후 다음 페이지로
-    }
-    
+    },
+    publish() {
+      let myPost = {
+        name: "Kim Hyun",
+        userImage: "https://picsum.photos/100?random=3",
+        postImage: this.imgUrl,
+        likes: 36,
+        date: "May 15",
+        liked: false,
+        content: this.write,
+        filter: "perpetua"
+      };
+      this.post.unshift(myPost); // 올린 게시물을 가장 앞에 보여줌. 
+      this.step = 0; // 메인화면으로 돌아오기
+      console.log(myPost);
+    },
   }
 }
 </script>

@@ -9,7 +9,7 @@
   <div class="menu">
     <a v-for="(menu, i) in menus" :key="i">{{ menu }}</a>
   </div>
-  <Discount 
+  <Discount
     :discountRate="discountRate"
     v-if="showDiscount"/>
   <button @click="priceSortReverse">가격 높은 순</button>
