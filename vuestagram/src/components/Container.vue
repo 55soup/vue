@@ -17,11 +17,7 @@
                 <!-- <img :src="imgUrl" alt="" style="width: 100%; height: 100%; object-fit: contain;"> -->
             </div>
             <div class="filters">
-                <div class="filter-1"></div>
-                <div class="filter-1"></div>
-                <div class="filter-1"></div>
-                <div class="filter-1"></div>
-                <div class="filter-1"></div>
+                <FilterBox v-for="(filter, i) in filters" :key="i" :filter="filter" :imgUrl="imgUrl"></FilterBox>
             </div>
         </div>
 
@@ -37,10 +33,19 @@
 
 <script>
 import Post from "./Post.vue"
+import FilterBox from './FilterBox.vue';
 
 export default {
+    data() {
+        return {
+            filters : [ "aden", "_1977", "brannan", "brooklyn", "clarendon", "earlybird", "gingham", "hudson", 
+            "inkwell", "kelvin", "lark", "lofi", "maven", "mayfair", "moon", "nashville", "perpetua", 
+            "reyes", "rise", "slumber", "stinson", "toaster", "valencia", "walden", "willow", "xpro2"]
+        }
+    },
     components : {
-        Post : Post,
+        Post,
+        FilterBox
     },
     props : {
         post : Array,
