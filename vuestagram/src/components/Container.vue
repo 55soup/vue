@@ -17,7 +17,13 @@
                 <!-- <img :src="imgUrl" alt="" style="width: 100%; height: 100%; object-fit: contain;"> -->
             </div>
             <div class="filters">
-                <FilterBox v-for="(filter, i) in filters" :key="i" :filter="filter" :imgUrl="imgUrl"></FilterBox>
+                <FilterBox v-for="(filter, i) in filters" :key="i" 
+                :filter="filter" :imgUrl="imgUrl">
+                    <!-- slot: 간단한 데이터 전송하고 싶을 때 사용(props 대안) -->
+                    <!-- slot props: 자식데이터를 부모가 받고 싶을때 -->
+                    <!-- <template v-slot:default="a">{{ a.msg }}</template> -->
+                    {{ filter }}
+                </FilterBox>
             </div>
         </div>
 
