@@ -1,9 +1,8 @@
 <template>
-    <div :class="`${filter} filter-item`" :style="`background-image : url(${imgUrl})`">
+    <div @click="fire" :class="`${filter} filter-item`" :style="`background-image : url(${imgUrl})`">
         <!-- 태그 안에 바인딩 할 때 -->
         <!-- <slot name="a" :msg="msg"></slot> -->
         <slot></slot>
-        <button @click="fire">버튼</button>
     </div> 
 </template>
 

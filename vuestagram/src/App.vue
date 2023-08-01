@@ -1,3 +1,7 @@
+<!-- 하위컴포넌트 전송: props
+     상위컴포넌트 전송: custom event
+     상관없이 전송: mitt
+     모든 컴포넌트들이 데이터 공유 가능: vuex-->
 <template>
   <div class="header">
     <ul class="header-button-left">
@@ -8,6 +12,9 @@
       <li v-if="step == 2" @click="publish()">발행</li>
     </ul>
   </div>
+  <h4>하이 {{  $store.state.name }}</h4>
+  <!-- vuex 컴포넌트 안에서 직접 수정 금지 -->
+  <button @click="$store.state.name = '박'">vuex state 바꾸기</button>
   <Container @write="write = $event" :post="post" :step="step" :imgUrl="imgUrl" :content="content" :filter="filter"/>
   <button @click="more">더보기</button>
 

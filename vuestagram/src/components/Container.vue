@@ -57,7 +57,7 @@ export default {
         post : Array,
         step : Number,
         imgUrl : Blob,
-        filter : String,
+        filter : String, // App.vue에서 받아온 filter
     },
 }
 </script>
