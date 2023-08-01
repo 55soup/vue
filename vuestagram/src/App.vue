@@ -8,7 +8,7 @@
       <li v-if="step == 2" @click="publish()">발행</li>
     </ul>
   </div>
-  <Container @write="write = $event" :post="post" :step="step" :imgUrl="imgUrl" :content="content"/>
+  <Container @write="write = $event" :post="post" :step="step" :imgUrl="imgUrl" :content="content" :filter="filter"/>
   <button @click="more">더보기</button>
 
   <div class="footer">
@@ -35,7 +35,13 @@ export default {
       imgUrl : '',
       write: '',
       content : '',
+      filter : '',
     }
+  },
+  mounted(){
+      this.emitter.on('filter', (a)=>{ // emitter.on() 으로 수신
+          this.filter = a;
+      })
   },
   components: {
     Container : Container,
@@ -69,13 +75,13 @@ export default {
         date: "May 15",
         liked: false,
         content: this.write,
-        filter: "perpetua"
+        filter: this.filter,
       };
       this.post.unshift(myPost); // 올린 게시물을 가장 앞에 보여줌. 
       this.step = 0; // 메인화면으로 돌아오기
       console.log(myPost);
     },
-  }
+  },
 }
 </script>
 

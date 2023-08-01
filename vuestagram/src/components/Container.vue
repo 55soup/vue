@@ -13,7 +13,7 @@
 
         <!-- 필터선택페이지 -->
         <div v-if="step == 1" >
-            <div class="upload-image" :style="`background-image : url(${imgUrl})`">
+            <div :class="`${filter} upload-image`" :style="`background-image : url(${imgUrl})`">
                 <!-- <img :src="imgUrl" alt="" style="width: 100%; height: 100%; object-fit: contain;"> -->
             </div>
             <div class="filters">
@@ -29,7 +29,7 @@
 
         <!-- 글작성페이지 -->
         <div v-if="step == 2">
-            <div class="upload-image" :style="`background-image : url(${imgUrl})`"></div>
+            <div :class="`${filter} upload-image`" :style="`background-image : url(${imgUrl})`"></div>
             <div class="write">
                 <textarea class="write-box" @input="$emit('write', $event.target.value);">write!</textarea>
             </div>
@@ -57,12 +57,8 @@ export default {
         post : Array,
         step : Number,
         imgUrl : Blob,
+        filter : String,
     },
-    methods : {
-        changeContent: {
-
-        }
-    }
 }
 </script>
 

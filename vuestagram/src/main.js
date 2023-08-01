@@ -1,4 +1,9 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 
-createApp(App).mount('#app')
+import mitt from 'mitt'
+let emitter = mitt();
+let app = createApp(App);
+app.config.globalProperties.emitter = emitter; // 자주쓰는 라이브러리 등록
+
+app.mount('#app')

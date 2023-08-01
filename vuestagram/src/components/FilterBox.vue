@@ -3,6 +3,7 @@
         <!-- 태그 안에 바인딩 할 때 -->
         <!-- <slot name="a" :msg="msg"></slot> -->
         <slot></slot>
+        <button @click="fire">버튼</button>
     </div> 
 </template>
 
@@ -17,7 +18,12 @@ export default {
     props: {
         filter : String,
         imgUrl : String,
-    }
+    },
+    methods : {
+        fire(){ 
+            this.emitter.emit('filter', this.filter); // emitter.emit 으로 데이터 송신
+        }
+    },
 }
 </script>
 
