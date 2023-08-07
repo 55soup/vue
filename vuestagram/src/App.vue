@@ -12,9 +12,14 @@
       <li v-if="step == 2" @click="publish()">발행</li>
     </ul>
   </div>
-  <h4>하이 {{  $store.state.name }}</h4>
+  <h4>하이 {{  $store.state.name }} 나는 {{ $store.state.age }}살 이야.</h4>
   <!-- vuex 컴포넌트 안에서 직접 수정 금지 -->
-  <button @click="$store.state.name = '박'">vuex state 바꾸기</button>
+  <!-- <button @click="$store.state.name = '박'">vuex state 바꾸기</button> -->
+
+  <!-- vuex mutations안 함수 가져와서 데이터 수정 -->
+  <button @click="$store.commit('alterName')">버튼</button>
+  <button @click="$store.commit('plusAge', 10)">나이 먹는 버튼</button>
+
   <Container @write="write = $event" :post="post" :step="step" :imgUrl="imgUrl" :content="content" :filter="filter"/>
   <button @click="more">더보기</button>
 
