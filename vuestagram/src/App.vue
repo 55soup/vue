@@ -20,6 +20,9 @@
   <button @click="$store.commit('alterName')">버튼</button>
   <button @click="$store.commit('plusAge', 10)">나이 먹는 버튼</button>
 
+  <!-- commit: mutations 부탁 / dispatch: actions 부탁 -->
+  <p>{{ $store.state.more }}</p>
+  <button @click="$store.dispatch('getData')">더보기 버튼</button>
   <Container @write="write = $event" :post="post" :step="step" :imgUrl="imgUrl" :content="content" :filter="filter"/>
   <button @click="more">더보기</button>
 
