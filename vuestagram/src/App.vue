@@ -18,12 +18,15 @@
 
   <!-- vuex mutations안 함수 가져와서 데이터 수정 -->
   <button @click="$store.commit('alterName')">버튼</button>
-  <button @click="$store.commit('plusAge', 10)">나이 먹는 버튼</button>
+  <button @click="plusAge(10)">나이 먹는 버튼</button>
 
   <!-- commit: mutations 부탁 / dispatch: actions 부탁 -->
   <p>{{ $store.state.more }}</p>
   <button @click="$store.dispatch('getData')">더보기 버튼</button>
   <Container @write="write = $event" :post="post" :step="step" :imgUrl="imgUrl" :content="content" :filter="filter"/>
+  <!-- counted () 소괄호를 쓰지 않음. -->
+  <p>{{ now2 }} {{ counter }}</p>
+  <button @click="counter++">버튼</button>
   <button @click="more">더보기</button>
 
   <div class="footer">
@@ -32,6 +35,9 @@
       <label for="file" class="input-plus">+</label>
     </ul>
   </div>
+
+  <!-- store안에 있는 state를 쉽게 가져올 수 있음. -->
+  <p>{{ newName }}</p>
   
 </template>
 
@@ -39,6 +45,7 @@
 import axios from 'axios';
 import Container from './components/Container';
 import post from './assets/post';
+import { mapMutations, mapState } from 'vuex';
 
 export default {
   name: 'App',
@@ -51,6 +58,7 @@ export default {
       write: '',
       content : '',
       filter : '',
+      counter: 0,
     }
   },
   mounted(){
@@ -61,7 +69,23 @@ export default {
   components: {
     Container : Container,
   },
+  computed : {
+    // 사용되도 실행x, 처음 실행하고 값을 간직함 useEffect(()=>{}, [])
+    now2(){
+      return new Date();
+    },
+    name(){
+      return this.$store.state.name;
+    },
+    ...mapState(['name', 'age', 'likes']), // vuex state 한번에 꺼내쓰기
+    ...mapState({ newName : 'name'}) // vuex에서 가져온 state 이름을 바꿔서 사용하고 싶을 때
+  },
   methods : {
+    ...mapMutations(['setMore', 'clickLike', 'plusAge']),
+    now() {
+      // methods 함수는 사용할 때 마다 실행
+      return new Date();
+    },
     more(){
       axios.get(`https://codingapple1.github.io/vue/more${this.clickCount}.json`)
       .then((result) => {
